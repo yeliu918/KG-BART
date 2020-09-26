@@ -1,2 +1,3 @@
 # KG-BART
-KG-BART: Knowledge Graph-Augmented BART for GenerativeCommonsense Reasoning
+KG-BART: Knowledge Graph-Augmented BART for Generative Commonsense Reasoning
+Published after getting acception
