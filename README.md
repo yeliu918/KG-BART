@@ -56,5 +56,10 @@ python decode_seq2seq.py --model_recover_path ../../output/BART_KG_new/model.bes
   --output_dir ../../output/BART_v2/Gen --output_file model.best --split train --beam_size 5
 ```
 ## 3. Evaluation
-Download the Evaluation Package and Follow the README:
+Download the Evaluation Package and follow the README:
 [Evaluation](https://github.com/INK-USC/CommonGen/tree/master/evaluation)
+
+## Dependencies
+* Python 3 (tested on python 3.6)
+* PyTorch (with GPU and CUDA enabled installation (though the code is runnable on CPU, it would be way too slow))
+* transformers
