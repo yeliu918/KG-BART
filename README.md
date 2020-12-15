@@ -16,6 +16,9 @@ Download the [CommonGen](https://drive.google.com/drive/folders/1sOuSY4ZeXsf1vYb
 ```
 ./get_data.sh
 ```
-
+### 1.2 Training Entity and Relation Embedding using TransE
+```
+./get_data.sh
+```
 ## 2. Graph-Based Encoder-Decoder Modeling
 
