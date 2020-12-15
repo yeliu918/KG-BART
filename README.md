@@ -11,7 +11,7 @@ When using our code or the methods, please cite our paper: [reference](https://a
 Option 1:
 Download our processed data:
 1. [CommonGen](https://drive.google.com/drive/folders/1sOuSY4ZeXsf1vYbPumiQxg2Pr1CECJNk?usp=sharing)
-2. [Entity_Relation_Embedding](https://drive.google.com/drive/folders/13h0PM_WvdsEh2FGc5l0iaxf7bWl_YVUe?usp=sharing)
+2. [Entity Relation Embedding](https://drive.google.com/drive/folders/13h0PM_WvdsEh2FGc5l0iaxf7bWl_YVUe?usp=sharing)
 3. [Concept Graph](https://drive.google.com/drive/folders/1i0UYYbUYNN4fmVKD5WgpImtcsRGWATnE?usp=sharing)
 
 Option 2: 
@@ -19,7 +19,7 @@ Following our guidness and process from the original data:
 
 Download the [Conceptnet](https://github.com/commonsense/conceptnet5/wiki/Downloads)
 
-Download the [CommonGen](https://inklab.usc.edu/CommonGen/)
+Download the [CommonGen Dataset](https://inklab.usc.edu/CommonGen/)
 
 ### 1.1 Preparing data 
 ```
