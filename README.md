@@ -32,6 +32,7 @@ python pretrain_kgbart.py --data_dir  ../../dataset/commongen_data/commongen --o
 ```
 
 ### 2.1 Train and evaluate CommonGen
+The following command shows how to fine-tune our KG-BART model with the CommonGen dataset created by ./get_data.sh as described above:
 ```
 python run_seq2seq.py --data_dir  ../../dataset/commongen_data/commongen --output_dir ../../output/BART_KG  
   --log_dir ../../log/BART_KG --fp16  --max_seq_length 32 --max_position_embeddings 64  --max_len_a 32 --max_len_b 64  
@@ -39,6 +40,7 @@ python run_seq2seq.py --data_dir  ../../dataset/commongen_data/commongen --outpu
   --warmup_proportion 0.1 --label_smoothing 0.1 --num_train_epochs 10
 ```
 ### 2.1 Test CommonGen
+Finally, we can evalaute the models on the test set, by running the following command:
 ```
 python decode_seq2seq.py --model_recover_path ../../output/BART_KG_new/model.best.bin 
   --input_file ../../dataset/commongen_data/commongen/commongen.test.src_alpha.txt 
