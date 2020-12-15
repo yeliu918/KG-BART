@@ -35,7 +35,7 @@ Download the [CommonGen Dataset](https://inklab.usc.edu/CommonGen/)
 The following command shows how to pretrain our KG-BART model with the Conceptnet dataset created by ./get_data.sh as described above:
 ```
 python pretrain_kgbart.py --data_dir  ../../dataset/commongen_data/commongen --output_dir ../../output/BART_KG  
-  --log_dir ../../log/BART_KG --fp16  --max_seq_length 32 --max_position_embeddings 64  --max_len_a 32 
+  --log_dir ../../log/BART_KG --fp16 True --max_seq_length 32 --max_position_embeddings 64  --max_len_a 32 
   --max_len_b 64 --max_pred 64 --train_batch_size 128 --train_batch_size 24 --gradient_accumulation_steps 6
   --learning_rate 0.00001 --warmup_proportion 0.1 --label_smoothing 0.1 --num_train_epochs 10
 ```
