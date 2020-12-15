@@ -13,7 +13,9 @@ Download the [Conceptnet](https://github.com/commonsense/conceptnet5/wiki/Downlo
 Download the [CommonGen](https://drive.google.com/drive/folders/1sOuSY4ZeXsf1vYbPumiQxg2Pr1CECJNk?usp=sharing)
 
 ### 1.1 Preparing data for TransE
+```
 ./get_data.sh
+```
 
 ## 2. Graph-Based Encoder-Decoder Modeling
 
