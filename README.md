@@ -22,3 +22,4 @@ Download the [CommonGen](https://drive.google.com/drive/folders/1sOuSY4ZeXsf1vYb
 ```
 ## 2. Graph-Based Encoder-Decoder Modeling
 
+### 2.1 Train and evaluate DNNC
