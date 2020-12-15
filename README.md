@@ -55,3 +55,6 @@ python decode_seq2seq.py --model_recover_path ../../output/BART_KG_new/model.bes
   --input_file ../../dataset/commongen_data/commongen/commongen.test.src_alpha.txt 
   --output_dir ../../output/BART_v2/Gen --output_file model.best --split train --beam_size 5
 ```
+## 3. Evaluation
+Download the Evaluation Package and Follow the README:
+[Evaluation](https://github.com/INK-USC/CommonGen/tree/master/evaluation)
