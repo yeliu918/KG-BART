@@ -9,5 +9,8 @@ When using our code or the methods, please cite our paper: [reference](https://a
 
 ## 1. Knowledge Graph Grounding
 Download the [Conceptnet](https://github.com/commonsense/conceptnet5/wiki/Downloads)
+
 Download the [CommonGen](https://drive.google.com/drive/folders/1sOuSY4ZeXsf1vYbPumiQxg2Pr1CECJNk?usp=sharing)
+
+## 2. Graph-Based Encoder-Decoder Modeling
 
