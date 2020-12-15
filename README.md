@@ -24,7 +24,10 @@ Download the [CommonGen](https://drive.google.com/drive/folders/1sOuSY4ZeXsf1vYb
 
 ### 2.1 Train and evaluate CommonGen
 ```
-python run_seq2seq.py --data_dir  ../../dataset/commongen_data/commongen --output_dir ../../output/BART_KG  --log_dir ../../log/BART_KG --fp16  --max_seq_length 32 --max_position_embeddings 64  --max_len_a 32 --max_len_b 64  --max_pred 64 --train_batch_size 128 --train_batch_size 24 --gradient_accumulation_steps 6 --learning_rate 0.00001 --warmup_proportion 0.1 --label_smoothing 0.1 --num_train_epochs 10
+python run_seq2seq.py --data_dir  ../../dataset/commongen_data/commongen --output_dir ../../output/BART_KG  
+  --log_dir ../../log/BART_KG --fp16  --max_seq_length 32 --max_position_embeddings 64  --max_len_a 32 --max_len_b 64  
+    --max_pred 64 --train_batch_size 128 --train_batch_size 24 --gradient_accumulation_steps 6 --learning_rate 0.00001
+    --warmup_proportion 0.1 --label_smoothing 0.1 --num_train_epochs 10
 ```
 ### 2.1 Test CommonGen
 ```
