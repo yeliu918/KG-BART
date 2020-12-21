@@ -26,6 +26,7 @@ Download the [CommonGen Dataset](https://inklab.usc.edu/CommonGen/)
 ./get_data.sh
 ```
 ### 1.2 Training Entity and Relation Embedding using TransE
+[OpenKE](https://github.com/thunlp/OpenKE)
 ```
 ./get_data.sh
 ```
