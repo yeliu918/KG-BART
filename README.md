@@ -27,8 +27,11 @@ mkdir dataset
 cd dataset
 wget https://s3.amazonaws.com/conceptnet/downloads/2019/edges/conceptnet-assertions-5.7.0.csv.gz
 
-python reorder_src.py --dataset_dir
-python conceptnet.py --dataset_dir
+python reorder_src.py --dataset_dir "dataset"  --save_dataset_dir "dataset/save_dataset" 
+--org_conceptnet "conceptnet-assertions-5.7.0.csv"  --save_conceptnet "conceptnet.csv"
+python conceptnet.py --dataset_dir "dataset"  --save_dataset_dir "dataset/save_dataset"   
+--OpenKE_dir "../OpenKE/benchmarks/CommonGen"  --save_conceptnet "conceptnet.csv"
+
 ```
 ### 1.2 Training Entity and Relation Embedding using TransE
 ```
@@ -36,9 +39,10 @@ cd OpenKE
 git clone -b OpenKE-PyTorch https://github.com/thunlp/OpenKE
 cd benchmarks/CommonGen
 python n-n.py
-python train_transe_FB15K237.py
+python train_transe_CommonGen.py
 cd ../KG_grounding
-python entity_onehot.py
+python entity_onehot.py --dataset_dir "dataset"  --save_dataset_dir "dataset/save_dataset"  
+--OpenKE_dir "../OpenKE/benchmarks/CommonGen"  --save_conceptnet "conceptnet.csv"
 ```
 ## 2. Graph-Based Encoder-Decoder Modeling
 
