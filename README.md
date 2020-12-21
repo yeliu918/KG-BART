@@ -23,12 +23,23 @@ Download the [CommonGen Dataset](https://inklab.usc.edu/CommonGen/)
 
 ### 1.1 Preparing data 
 ```
-./get_data.sh
+mkdir dataset
+cd dataset
+wget https://s3.amazonaws.com/conceptnet/downloads/2019/edges/conceptnet-assertions-5.7.0.csv.gz
+
+python reorder_src.py --dataset_dir
+python conceptnet.py --dataset_dir
 ```
 ### 1.2 Training Entity and Relation Embedding using TransE
 [OpenKE](https://github.com/thunlp/OpenKE)
 ```
-./get_data.sh
+cd OpenKE
+git clone -b OpenKE-PyTorch https://github.com/thunlp/OpenKE
+cd benchmarks/CommonGen
+python n-n.py
+python train_transe_FB15K237.py
+cd ../KG_grounding
+python entity_onehot.py
 ```
 ## 2. Graph-Based Encoder-Decoder Modeling
 
