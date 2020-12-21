@@ -31,7 +31,6 @@ python reorder_src.py --dataset_dir
 python conceptnet.py --dataset_dir
 ```
 ### 1.2 Training Entity and Relation Embedding using TransE
-[OpenKE](https://github.com/thunlp/OpenKE)
 ```
 cd OpenKE
 git clone -b OpenKE-PyTorch https://github.com/thunlp/OpenKE
