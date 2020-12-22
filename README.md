@@ -76,6 +76,9 @@ Download the Evaluation Package and follow the README:
 
 ## Dependencies
 * Python 3 (tested on python 3.6)
-* PyTorch (with GPU and CUDA enabled installation (though the code is runnable on CPU, it would be way too slow))
+* PyTorch (with GPU and CUDA enabled installation)
+* amp 
 * tqdm
+## Acknowledgments
+Our code is based on Huggingface Transformer. We thank the authors for their wonderful open-source efforts.
 
