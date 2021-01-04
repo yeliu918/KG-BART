@@ -16,22 +16,17 @@ Download our processed data:
 
 Option 2: 
 Following our guidness and process from the original data:
+Download the following data to dataset direction:
 
-Download the [Conceptnet](https://github.com/commonsense/conceptnet5/wiki/Downloads)
+1. Download the [Conceptnet](https://github.com/commonsense/conceptnet5/wiki/Downloads)
+2. Download the [CommonGen Dataset](https://inklab.usc.edu/CommonGen/), which require to fill the form
 
-Download the [CommonGen Dataset](https://inklab.usc.edu/CommonGen/)
-
-### 1.1 Preparing data 
+### 1.1 Preparing data  
 ```
-mkdir dataset
-cd dataset
-wget https://s3.amazonaws.com/conceptnet/downloads/2019/edges/conceptnet-assertions-5.7.0.csv.gz
-
 python reorder_src.py --dataset_dir "dataset"  --save_dataset_dir "dataset/save_dataset" 
 --org_conceptnet "conceptnet-assertions-5.7.0.csv"  --save_conceptnet "conceptnet.csv"
 python conceptnet.py --dataset_dir "dataset"  --save_dataset_dir "dataset/save_dataset"   
 --OpenKE_dir "../OpenKE/benchmarks/CommonGen"  --save_conceptnet "conceptnet.csv"
-
 ```
 ### 1.2 Training Entity and Relation Embedding using TransE
 ```
@@ -47,29 +42,31 @@ python entity_onehot.py --dataset_dir "dataset"  --save_dataset_dir "dataset/sav
 ## 2. Graph-Based Encoder-Decoder Modeling
 
 ### 2.0 Pre-training 
-The following command shows how to pretrain our KG-BART model with the Conceptnet dataset created by ./get_data.sh as described above:
+Option 2.0.1 The following command shows how to pretrain our KG-BART model with the Conceptnet dataset created by ./get_data.sh as described above:
 ```
-python pretrain_kgbart.py --data_dir  ../../../dataset/commongen_data/commongen --output_dir ../../output/Pretraining_KG   
---log_dir ../../log/Pretraining_KG  --pretraining_KG --train_pretraining_num 200000  --val_pretraining_num 40000 --fp16 True 
---max_seq_length 32 --max_position_embeddings 64  --max_len_a 32    --max_len_b 64 --max_pred 64 --train_batch_size 128
---train_batch_size 48 --gradient_accumulation_steps 6    --learning_rate 0.00001  --warmup_proportion 0.1 --label_smoothing 0.1 
---num_train_epochs 20
+python pretrain_kgbart.py --data_dir ../dataset/commongen_data/commongen --output_dir ../output/Pretraining_KG 
+    --log_dir ../log/Pretraining_KG2 --pretraining_KG --train_pretraining_num 400000 --val_pretraining_num 80000 
+    --fp16 True --max_seq_length 32 --max_position_embeddings 64 --max_len_a 32 --max_len_b 64 --max_pred 64 
+    --train_batch_size 60 --eval_batch_size 48 --gradient_accumulation_steps 6 --learning_rate 0.00001 
+    --warmup_proportion 0.1 --label_smoothing 0.1 --num_train_epochs 10
 ```
+Option 2.0.2 Download the [Pre-training Weight](https://drive.google.com/drive/folders/18BHATG8ZtZiO6sLQemNWsLUdwwuqUabE?usp=sharing)
 
 ### 2.1 Train and evaluate CommonGen
 The following command shows how to fine-tune our KG-BART model with the CommonGen dataset created by ./get_data.sh as described above:
 ```
-python run_seq2seq.py --data_dir  ../../dataset/commongen_data/commongen --output_dir ../../output/BART_KG  
-  --log_dir ../../log/BART_KG --fp16 True --max_seq_length 32 --max_position_embeddings 64  --max_len_a 32 
-  --max_len_b 64 --max_pred 64 --train_batch_size 128 --train_batch_size 24 --gradient_accumulation_steps 6 
-  --learning_rate 0.00001  --warmup_proportion 0.1 --label_smoothing 0.1 --num_train_epochs 10
+python run_seq2seq.py --data_dir  ../dataset/commongen_data/commongen --output_dir ../output/KGBart
+    --log_dir ../log/KGBart --model_recover_path ../output/Pretraining_KG/best_model/model.best.bin --fp16 True
+    --max_seq_length 32 --max_position_embeddings 64 --max_len_a 32 --max_len_b 64 --max_pred 64
+    --train_batch_size 60 --eval_batch_size 48 --gradient_accumulation_steps 6 --learning_rate 0.00001
+    --warmup_proportion 0.1 --label_smoothing 0.1 --num_train_epochs 10
 ```
 ### 2.1 Test CommonGen
 Finally, we can evalaute the models on the test set, by running the following command:
 ```
-python decode_seq2seq.py --model_recover_path ../../output/BART_KG_new/model.best.bin 
-  --input_file ../../dataset/commongen_data/commongen/commongen.test.src_alpha.txt 
-  --output_dir ../../output/BART_v2/Gen --output_file model.best --split train --beam_size 5
+python decode_seq2seq.py --data_dir ../dataset/commongen_data/commongen --model_recover_path ../output/KGBart/best_model/model.best.bin
+ --input_file ../dataset/commongen_data/commongen/commongen.dev.src_alpha.txt --output_dir ../output/KGBart/best_model/Gen
+ --output_file model.best --split dev --beam_size 5 --forbid_duplicate_ngrams True
 ```
 ## 3. Evaluation
 Download the Evaluation Package and follow the README:
@@ -82,4 +79,3 @@ Download the Evaluation Package and follow the README:
 * tqdm
 ## Acknowledgments
 Our code is based on Huggingface Transformer. We thank the authors for their wonderful open-source efforts.
-
