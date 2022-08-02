@@ -233,7 +233,7 @@ def main():
 
     args = parser.parse_args()
 
-    args.model_recover_path = os.path.join(PROJECT_DIR, 'Pretraining_KG')
+    args.model_recover_path = os.path.join(PROJECT_DIR, 'Pretraining_KG/best_model/model.best.bin')
 
     # assert Path(args.model_recover_path).exists(
     # ), "--model_recover_path doesn't exist"
