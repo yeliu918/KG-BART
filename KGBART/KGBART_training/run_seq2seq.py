@@ -313,14 +313,14 @@ def main():
     # TODO PROJECT_DIR 不应存成全局变量，要放入args里面
     args_dir = os.path.join(PROJECT_DIR, 'CommonGen_Dataset')
     entity_id = os.path.join(
-        PROJECT_DIR, args.tgt_file if args.tgt_file else 'CommonGen_KG/commongen_entity2id.txt')
+        args_dir, args.tgt_file if args.tgt_file else 'CommonGen_KG/commongen_entity2id.txt')
     entity_embedding_path = os.path.join(
-        PROJECT_DIR, args.tgt_file if args.tgt_file else 'CommonGen_KG/commongen_ent_embeddings')
+        args_dir, args.tgt_file if args.tgt_file else 'CommonGen_KG/commongen_ent_embeddings')
 
     relation_id = os.path.join(
-        PROJECT_DIR, args.tgt_file if args.tgt_file else 'CommonGen_KG/commongen_relation2id.txt')
+        args_dir, args.tgt_file if args.tgt_file else 'CommonGen_KG/commongen_relation2id.txt')
     relation_embedding_path = os.path.join(
-        PROJECT_DIR, args.tgt_file if args.tgt_file else 'CommonGen_KG/commongen_rel_embeddings')
+        args_dir, args.tgt_file if args.tgt_file else 'CommonGen_KG/commongen_rel_embeddings')
 
     entity_embedding = np.array(pickle.load(open(entity_embedding_path, "rb")))
     entity_embedding = np.array(list(np.zeros((4, 1024))) + list(entity_embedding))
