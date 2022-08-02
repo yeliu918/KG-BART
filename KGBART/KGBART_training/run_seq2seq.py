@@ -21,6 +21,7 @@ import os
 import sys
 
 os.chdir("../")
+PROJECT_DIR = os.getcwd()
 print("Current Working Directory ", os.getcwd())
 sys_path = os.path.join(os.getcwd(), 'KGBART')
 sys.path.insert(1, sys_path)
@@ -299,15 +300,26 @@ def main():
                                           s2s_share_segment=args.s2s_share_segment,
                                           pos_shift=args.pos_shift)]
     file_oracle = None
+    # entity_id = os.path.join(
+    #     args.data_dir, args.tgt_file if args.tgt_file else 'CommonGen_KG/commongen_entity2id.txt')
+    # entity_embedding_path = os.path.join(
+    #     args.data_dir, args.tgt_file if args.tgt_file else 'CommonGen_KG/commongen_ent_embeddings')
+    #
+    # relation_id = os.path.join(
+    #     args.data_dir, args.tgt_file if args.tgt_file else 'CommonGen_KG/commongen_relation2id.txt')
+    # relation_embedding_path = os.path.join(
+    #     args.data_dir, args.tgt_file if args.tgt_file else 'CommonGen_KG/commongen_rel_embeddings')
+
+    # TODO PROJECT_DIR 不应存成全局变量，要放入args里面
     entity_id = os.path.join(
-        args.data_dir, args.tgt_file if args.tgt_file else 'CommonGen_KG/commongen_entity2id.txt')
+        PROJECT_DIR, args.tgt_file if args.tgt_file else 'CommonGen_KG/commongen_entity2id.txt')
     entity_embedding_path = os.path.join(
-        args.data_dir, args.tgt_file if args.tgt_file else 'CommonGen_KG/commongen_ent_embeddings')
+        PROJECT_DIR, args.tgt_file if args.tgt_file else 'CommonGen_KG/commongen_ent_embeddings')
 
     relation_id = os.path.join(
-        args.data_dir, args.tgt_file if args.tgt_file else 'CommonGen_KG/commongen_relation2id.txt')
+        PROJECT_DIR, args.tgt_file if args.tgt_file else 'CommonGen_KG/commongen_relation2id.txt')
     relation_embedding_path = os.path.join(
-        args.data_dir, args.tgt_file if args.tgt_file else 'CommonGen_KG/commongen_rel_embeddings')
+        PROJECT_DIR, args.tgt_file if args.tgt_file else 'CommonGen_KG/commongen_rel_embeddings')
 
     entity_embedding = np.array(pickle.load(open(entity_embedding_path, "rb")))
     entity_embedding = np.array(list(np.zeros((4, 1024))) + list(entity_embedding))
