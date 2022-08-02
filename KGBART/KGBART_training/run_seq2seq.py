@@ -312,6 +312,7 @@ def main():
 
     # TODO PROJECT_DIR 不应存成全局变量，要放入args里面
     args_dir = os.path.join(PROJECT_DIR, 'CommonGen_Dataset')
+    args.data_dir = args_dir
     entity_id = os.path.join(
         args_dir, args.tgt_file if args.tgt_file else 'CommonGen_KG/commongen_entity2id.txt')
     entity_embedding_path = os.path.join(
