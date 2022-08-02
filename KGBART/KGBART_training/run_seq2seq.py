@@ -334,11 +334,11 @@ def main():
         if args.pretraining_KG:
             file_oracle = os.path.join(args.data_dir, 'commongen.train.oracle')
         fn_src = os.path.join(
-            args.data_dir, args.src_file if args.src_file else 'commongen.train.src_new.txt')
+            args_dir, args.src_file if args.src_file else 'commongen.train.src_new.txt')
         fn_tgt = os.path.join(
-            args.data_dir, args.tgt_file if args.tgt_file else 'commongen.train.tgt.txt')
+            args_dir, args.tgt_file if args.tgt_file else 'commongen.train.tgt.txt')
         fn_onehop = os.path.join(
-            args.data_dir, args.tgt_file if args.tgt_file else 'commongen.train.onehop_5.txt')
+            args_dir, args.tgt_file if args.tgt_file else 'commongen.train.onehop_5.txt')
         train_dataset = seq2seq_loader.Seq2SeqDataset(
             fn_src, fn_tgt, entity_id, relation_id, fn_onehop, args.train_batch_size, data_tokenizer,
             args.max_seq_length, bi_uni_pipeline=bi_uni_pipeline)
