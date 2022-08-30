@@ -1600,6 +1600,7 @@ class KGBartForConditionalGeneration(PretrainedBartModel):
         self.register_buffer("final_logits_bias", torch.zeros((1, self.model.shared.num_embeddings)))
         self.crit_mask_lm = nn.CrossEntropyLoss(reduction='none')
         self.vocab_size = config.vocab_size
+        self.embed_dim = config.hidden_size
 
     def resize_token_embeddings(self, new_num_tokens: int) -> nn.Embedding:
         old_num_tokens = self.model.shared.num_embeddings
@@ -1730,9 +1731,12 @@ class KGBartForConditionalGeneration(PretrainedBartModel):
                 # TODO(SS): do we need to ignore pad tokens in labels?
                 masked_lm_loss = loss_fct(lm_logits.view(-1, self.config.vocab_size), labels.view(-1))
 
+        bsz, seqlen = input_ids.size()
         last_hidden_states = outputs[0]
+        assert last_hidden_states.size() == torch.Size([bsz, seqlen, self.embed_dim])
         norm_rep = last_hidden_states / last_hidden_states.norm(dim=2, keepdim=True)
         cosine_scores = torch.matmul(norm_rep, norm_rep.transpose(1, 2))
+        assert cosine_scores.size() == torch.Size([bsz, seqlen, seqlen])
         cl_loss = contrastive_loss(0.5, cosine_scores, input_ids, input_entity_ids, 0)
 
         logger.info(type(masked_lm_loss))
