@@ -43,7 +43,7 @@ from .modeling_outputs import (
     Seq2SeqSequenceClassifierOutput,
 )
 from .modeling_utils import PreTrainedModel
-from .loss import LabelSmoothingLoss
+from .loss import LabelSmoothingLoss, contrastive_loss
 
 logger = logging.getLogger(__name__)
 
@@ -1729,6 +1729,14 @@ class KGBartForConditionalGeneration(PretrainedBartModel):
                 loss_fct = nn.CrossEntropyLoss(ignore_index=-100)
                 # TODO(SS): do we need to ignore pad tokens in labels?
                 masked_lm_loss = loss_fct(lm_logits.view(-1, self.config.vocab_size), labels.view(-1))
+
+        last_hidden_states = outputs[0]
+        norm_rep = last_hidden_states / last_hidden_states.norm(dim=2, keepdim=True)
+        cosine_scores = torch.matmul(norm_rep, norm_rep.transpose(1, 2))
+        cl_loss = contrastive_loss(0.5, cosine_scores, input_ids, self.pad_token_id, 0)
+
+        assert cl_loss.size() == masked_lm_loss.size(), 'loss长度不一致'
+
 
         if return_tuple:
             output = (lm_logits,) + outputs[1:]
