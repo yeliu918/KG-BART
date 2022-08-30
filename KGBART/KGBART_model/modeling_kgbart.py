@@ -1735,7 +1735,10 @@ class KGBartForConditionalGeneration(PretrainedBartModel):
         cosine_scores = torch.matmul(norm_rep, norm_rep.transpose(1, 2))
         cl_loss = contrastive_loss(0.5, cosine_scores, input_ids, input_entity_ids, 0)
 
-        assert cl_loss.size() == masked_lm_loss.size(), 'loss长度不一致'
+        logger.info(type(masked_lm_loss))
+        logger.info(type(cl_loss))
+        logger.info(masked_lm_loss.size())
+        logger.info(cl_loss.size())
 
 
         if return_tuple:
