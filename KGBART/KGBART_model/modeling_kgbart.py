@@ -1735,7 +1735,7 @@ class KGBartForConditionalGeneration(PretrainedBartModel):
         logger.info("input size {}".format(input_ids.size()))
         logger.info("last hidden states {}".format(outputs[0].size()))
         last_hidden_states = outputs[0]
-        assert last_hidden_states.size() == torch.Size([bsz, seqlen, self.embed_dim])
+        # assert last_hidden_states.size() == torch.Size([bsz, seqlen, self.embed_dim])
         norm_rep = last_hidden_states / last_hidden_states.norm(dim=2, keepdim=True)
         cosine_scores = torch.matmul(norm_rep, norm_rep.transpose(1, 2))
         logger.info(cosine_scores.size())
