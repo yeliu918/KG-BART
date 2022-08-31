@@ -1732,13 +1732,12 @@ class KGBartForConditionalGeneration(PretrainedBartModel):
                 masked_lm_loss = loss_fct(lm_logits.view(-1, self.config.vocab_size), labels.view(-1))
 
         bsz, seqlen = input_ids.size()
-        logger.info(input_ids.size())
-        logger.info(outputs[0].size())
+        logger.info("input size %", input_ids.size())
+        logger.info("last hidden states %", outputs[0].size())
         last_hidden_states = outputs[0]
-        # assert last_hidden_states.size() == torch.Size([bsz, seqlen, self.embed_dim])
-        # norm_rep = last_hidden_states / last_hidden_states.norm(dim=2, keepdim=True)
-        norm_rep = last_hidden_states
-        cosine_scores = torch.matmul(norm_rep, norm_rep.transpose(0, 1))
+        assert last_hidden_states.size() == torch.Size([bsz, seqlen, self.embed_dim])
+        norm_rep = last_hidden_states / last_hidden_states.norm(dim=2, keepdim=True)
+        cosine_scores = torch.matmul(norm_rep, norm_rep.transpose(1, 2))
         logger.info(cosine_scores.size())
         assert cosine_scores.size() == torch.Size([bsz, seqlen, seqlen])
         cl_loss = contrastive_loss(0.5, cosine_scores, input_ids, input_entity_ids, 0)
