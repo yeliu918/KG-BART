@@ -1745,8 +1745,8 @@ class KGBartForConditionalGeneration(PretrainedBartModel):
 
         # logger.info(type(masked_lm_loss))
         # logger.info(type(cl_loss))
-        # logger.info(masked_lm_loss.size())
-        # logger.info(cl_loss.size())
+        logger.info(masked_lm_loss.size())
+        logger.info(cl_loss.size())
 
 
         if return_tuple:
@@ -1754,7 +1754,7 @@ class KGBartForConditionalGeneration(PretrainedBartModel):
             return ((masked_lm_loss,) + output) if masked_lm_loss is not None else output
 
         return Seq2SeqLMOutput(
-            loss=masked_lm_loss,
+            loss=masked_lm_loss + cl_loss,
             logits=lm_logits,
             decoder_past_key_values=outputs.decoder_past_key_values,
             decoder_hidden_states=outputs.decoder_hidden_states,
