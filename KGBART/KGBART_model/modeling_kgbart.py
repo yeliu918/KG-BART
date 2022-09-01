@@ -1745,8 +1745,8 @@ class KGBartForConditionalGeneration(PretrainedBartModel):
 
         # logger.info(type(masked_lm_loss))
         # logger.info(type(cl_loss))
-        logger.info(masked_lm_loss.size())
-        logger.info(cl_loss.size())
+        # logger.info(masked_lm_loss.size())
+        # logger.info(cl_loss.size())
 
 
         if return_tuple:
