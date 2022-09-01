@@ -118,9 +118,6 @@ def contrastive_loss(margin, score_matrix, input_ids, pad_token_id, prefix_len=0
     if score_matrix.is_cuda:
         loss_mask = loss_mask.cuda(score_matrix.get_device())
     masked_loss_matrix = loss_matrix * loss_mask
-    logger.info("loss_mask size:{}".format(loss_mask.size()))
-    logger.info("loss_matrix size:{}".format(loss_matrix.size()))
-    logger.info("masked_loss_matrix size : {}".format(masked_loss_matrix.size()))
     loss_matrix = torch.sum(masked_loss_matrix, dim = -1)
     loss_matrix = loss_matrix[:, :32]
     assert loss_matrix.size() == input_ids.size()
