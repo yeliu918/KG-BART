@@ -122,6 +122,7 @@ def contrastive_loss(margin, score_matrix, input_ids, pad_token_id, prefix_len=0
     logger.info("loss_matrix size:{}".format(loss_matrix.size()))
     logger.info("masked_loss_matrix size : {}".format(masked_loss_matrix.size()))
     loss_matrix = torch.sum(masked_loss_matrix, dim = -1)
+    loss_matrix = loss_matrix[:, :32, :]
     assert loss_matrix.size() == input_ids.size()
     loss_matrix = loss_matrix * input_mask
     cl_loss = torch.sum(loss_matrix) / torch.sum(loss_mask)
