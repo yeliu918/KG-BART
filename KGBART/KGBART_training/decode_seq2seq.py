@@ -23,7 +23,7 @@ import json
 os.chdir("../")
 PROJECT_DIR = os.getcwd()
 print("Current Working Directory ", os.getcwd())
-sys_path = os.path.join(os.getcwd(), 'KGBART')
+sys_path = os.path.join(os.getcwd())
 sys.path.insert(1, sys_path)
 from nn.data_parallel import DataParallelImbalance
 import KGBART_training.seq2seq_loader as seq2seq_loader
