@@ -1740,7 +1740,7 @@ class KGBartForConditionalGeneration(PretrainedBartModel):
         cosine_scores = torch.matmul(norm_rep, norm_rep.transpose(1, 2))
         cosine_scores = cosine_scores[:, :32, :32]
         # logger.info("cosine_scores size {}".format(cosine_scores.size()))
-        assert cosine_scores.size() == torch.Size([bsz, seqlen, seqlen])
+        # assert cosine_scores.size() == torch.Size([bsz, seqlen, seqlen])
         cl_loss = contrastive_loss(0.5, cosine_scores, input_ids, input_entity_ids, 0)
 
         # logger.info(type(masked_lm_loss))
@@ -1754,7 +1754,8 @@ class KGBartForConditionalGeneration(PretrainedBartModel):
             return ((masked_lm_loss,) + output) if masked_lm_loss is not None else output
 
         return Seq2SeqLMOutput(
-            loss=masked_lm_loss + cl_loss,
+            # loss=masked_lm_loss + cl_loss,
+            loss=masked_lm_loss,
             logits=lm_logits,
             decoder_past_key_values=outputs.decoder_past_key_values,
             decoder_hidden_states=outputs.decoder_hidden_states,
