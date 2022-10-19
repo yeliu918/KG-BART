@@ -1731,7 +1731,7 @@ class KGBartForConditionalGeneration(PretrainedBartModel):
                 # TODO(SS): do we need to ignore pad tokens in labels?
                 masked_lm_loss = loss_fct(lm_logits.view(-1, self.config.vocab_size), labels.view(-1))
 
-        bsz, seqlen = input_ids.size()
+        # bsz, seqlen = input_ids.size()
         # logger.info("input size {}".format(input_ids.size()))
         # logger.info("last hidden states {}".format(outputs[0].size()))
         last_hidden_states = outputs[0]
